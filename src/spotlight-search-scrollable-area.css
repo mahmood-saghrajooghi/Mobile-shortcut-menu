@@ -1,0 +1,5 @@
+
+[spotlight-search-scrollable-area] {
+  overflow-y: auto;
+  position: relative;
+}

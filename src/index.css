@@ -17,10 +17,6 @@
   box-sizing: border-box;
 }
 
-html,body, #root{
-  -webkit-overflow-scrolling : touch !important;
-}
-
 body {
   margin: 0;
   min-width: 320px;
@@ -29,10 +25,11 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  flex-basis: 0;
 }
 
 #root {
   flex: 1;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
