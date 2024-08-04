@@ -1,29 +1,140 @@
 .pull-to-refresh {
   width: 100%;
   height: 0;
-  background-color: white;
 }
 
 .container {
-  background-color: #202020;
   color: #F9F9F9;
-  height: 100dvh;
   padding: 1rem;
-  overflow: hidden;
   position: relative;
 }
 
-input {
+.input {
   padding-left: .75rem;
   padding-right: .75rem;
   font-size: .75rem;
   line-height: 1.25rem;
   background-color: #2A2A2A;
   border: none;
-  border-radius: calc(.5rem - 2px);
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  border-radius: 8px;
+  margin-top: auto;
   outline: none;
+  z-index: 2;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+@keyframes blink_input_opacity_to_prevent_scrolling_when_focus {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+/* prevent auto scrolling when input gets focused */
+input:focus{
+  animation: blink_input_opacity_to_prevent_scrolling_when_focus 1ms;
+}
+
+
+.content {
+  height: 100%;
+}
+
+.overlay {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+.overlay::after {
+  content: "";
+  display: block;
+  height: 200%;
+  width: 100%;
+  position: absolute;
+  background-color: #1919199f;
+  top: -50%;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  z-index: -1;
+}
+
+.overlay .background {
+  /* background-color: #1919199f; */
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.overlay [cmdk-root] {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay .overlayContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: .5rem;
+  position: relative;
+  z-index: 1;
+  overflow-y: hidden;
+}
+
+.overlay [cmdk-list],
+.overlay [cmdk-list-sizer] {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+
+.item {
+ display: flex;
+ align-items: center;
+ gap: .5rem;
+ width: 100%;
+ padding: .5rem;
+ border-radius: 6px;
+}
+
+.item[data-selected="true"] {
+  background-color: #313131;
+}
+
+.item .left {
+  display: flex;
+}
+
+.item .left .icon {
+  display: flex;
+  padding: .25rem;
+  background-color: #3A3A3A;
+  border-radius: 8px;
+}
+
+.item .right {
+  font-size: .875rem;
+  display: flex;
+  gap: .25rem;
+  flex: 1;
+  position: relative;
+}
+
+.item .right .extra {
+display: flex;
+align-items: center;
+gap: .25rem;
 }
